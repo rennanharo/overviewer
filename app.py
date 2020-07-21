@@ -19,6 +19,7 @@ st.subheader("Let's start by customizing your query")
 #st.text("Pure text")
 #st.markdown("- [ ] Markdown ")
 
+
 # TWITTER
 
 def get_tweets(search, location, startdate, enddate, maxtweet):
@@ -45,6 +46,7 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
     
     return tweets_df
 
+
 ## Search --> Text box
 search = st.text_input("What are you searching for?", "Bolsonaro")
 
@@ -60,6 +62,7 @@ end_date = st.date_input("Select the end date", datetime.date.today())
 ## Max tweets --> Slider
 max_tweets = st.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
 
+
 ## Run query button
 run_query = st.button("Run the query")
 if run_query:
@@ -68,26 +71,29 @@ if run_query:
 
   tweets = get_tweets(str(search), str(location), str(start_date), str(end_date), max_tweets)
   
-  st.dataframe(tweets.head())
-
   st.success("Done!")
   st.balloons()
 
+
+  ## File preview
+  st.subheader("Preview the query")
+  st.dataframe(tweets.head())
+
+
   ## Download file button
-  download_file = st.button("Download the CSV file")
-  if download_file:
-    ##TODO Download file script
-    pass
+  st.subheader("Download link")
   csv = tweets.to_csv(index=False)
   b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
   href = f'<a href="data:file/csv;base64,{b64}" download="tweets.csv">Download csv file</a>'
   st.markdown(href, unsafe_allow_html=True)
 
+
   ##TODO View DF online
-  view_online = st.button("View the results online")
-
-
-
-#tweets.to_csv('tweets.csv', index = False)
+  ## Full dataframe
+  st.subheader("Full file")
+  st.dataframe(tweets)
 
 # END TWITTER
+
+
+st.text("Developed by Rennan Haro. 2020.")
