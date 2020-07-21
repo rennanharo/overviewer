@@ -2,6 +2,7 @@ import streamlit as st
 import GetOldTweets3 as got
 import pandas as pd
 import datetime, time
+import base64
 
 # Hiding the hamburguer menu
 hide_streamlit_style = """
@@ -12,11 +13,11 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
-st.title("Title")
-st.header("Header")
-st.subheader("Subheader")
-st.text("Pure text")
-st.markdown("- [ ] Markdown ")
+st.title("Welcome to The Overviewer")
+st.header("Analytics-friendly information extractor")
+st.subheader("Let's start by customizing your query")
+#st.text("Pure text")
+#st.markdown("- [ ] Markdown ")
 
 # TWITTER
 
@@ -48,13 +49,13 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
 search = st.text_input("What are you searching for?", "Bolsonaro")
 
 ## Location --> Text box (with map if possible)
-search = st.text_input("Where are you searching it for?", "Brazil")
+location = st.text_input("Where are you searching it for?", "Brazil")
 
 ## Start date --> Date picker
 start_date = st.date_input("Select the start date", datetime.date(2019, 7, 30))
 
 ## End date --> Date picker
-end_date = st.date_input("Select the end date", datetime.date(2019, 7, 30))
+end_date = st.date_input("Select the end date", datetime.date.today())
 
 ## Max tweets --> Slider
 max_tweets = st.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
@@ -62,27 +63,30 @@ max_tweets = st.slider("What is the maximum number of Tweets you want?", 100, 50
 ## Run query button
 run_query = st.button("Run the query")
 if run_query:
-  ##TODO Call query function
-  #tweets = get_tweets(str(search.value), str(location.value), str(s_date.value), str(e_date.value), max_tweets.value)
-  pass
+  with st.spinner("Wait..."):
+    time.sleep(1)
 
-## Download file button
-download_file = st.button("Download the CSV file")
-if download_file:
-  ##TODO Download file script
-  pass
+  tweets = get_tweets(str(search), str(location), str(start_date), str(end_date), max_tweets)
+  
+  st.dataframe(tweets.head())
 
-## Query status
-##TODO Keep it async and finish running when query complete
-with st.spinner("Wait..."):
-  time.sleep(15)
-st.success("Done!")
+  st.success("Done!")
+  st.balloons()
 
-##TODO DF HEAD PREVIEW
-st.dataframe(tweets.head())
+  ## Download file button
+  download_file = st.button("Download the CSV file")
+  if download_file:
+    ##TODO Download file script
+    pass
+  csv = tweets.to_csv(index=False)
+  b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
+  href = f'<a href="data:file/csv;base64,{b64}" download="tweets.csv">Download csv file</a>'
+  st.markdown(href, unsafe_allow_html=True)
+
+  ##TODO View DF online
+  view_online = st.button("View the results online")
 
 
-#
 
 #tweets.to_csv('tweets.csv', index = False)
 
