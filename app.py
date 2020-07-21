@@ -81,8 +81,8 @@ if run_query:
 
 
   ## Download file button
-  st.subheader("Download link")
-  csv = tweets.to_csv(index=False)
+  st.subheader("Download link sig")
+  csv = tweets.to_csv(index=False, encoding='utf-8-sig')
   b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
   href = f'<a href="data:file/csv;base64,{b64}" download="tweets.csv">Download csv file</a>'
   st.markdown(href, unsafe_allow_html=True)
