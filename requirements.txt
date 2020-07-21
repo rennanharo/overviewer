@@ -3,3 +3,7 @@ pandas
 pandas-profiling
 streamlit-pandas-profiling
 numpy
+base64
+GetOldTweets3
+datetime
+time
