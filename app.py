@@ -15,22 +15,22 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # End hiding the hamburguer menu
 
 
-st.header("Welcome to The Overviewer")
 st.markdown("""
+                ## Welcome to The Overviewer.
                 The Overviewer is an open source project to create a full-fledge tool to extract information from social media.
 
                 Currently The Overviewer supports the following social media platforms:
                 - Twitter
 
                 You can check the [source code here.](https://github.com/rennanharo/overviewer)\n
-                Feel free to contribute with any suggestions or pull requests. Let's build this together.\n
-                `Developed by Rennan Haro 2020.`
+                Feel free to contribute with any suggestions or pull requests.
            """)
-st.markdown('-'*17)
+st.markdown('-'*7)
 
 supported_tools = ["-","Twitter"]
 st.markdown("### ~> Start by selecting your tool in the `selector below`. ")
 tool = st.selectbox("Select your social media", supported_tools)
+
 
 # TWITTER
 if tool == "Twitter":
@@ -62,8 +62,11 @@ if tool == "Twitter":
 
   st.markdown('-'*17)
   st.markdown("""
-                To work with Twitter, `customize your query in the sidebar to the right.`\n
-                Then, hit the `"Run the query"` button.
+                ### Twitter
+                To work with **Twitter**, `customize your query in the sidebar to the left.`\n
+                Then hit the `"Run the query"` button.
+                If there are any tweets that match your criteria, a _preview_ (first 5 rows) of the datased
+                will show up, followed by a link to download the _CSV_ file.
            """)
   st.markdown('-'*17)
 
@@ -85,9 +88,10 @@ if tool == "Twitter":
   end_date = st.sidebar.date_input("Select the end date", datetime.date.today())
 
   ## Max tweets --> Slider
-  max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
+  max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want? (The larger the number, the longer it takes to run.)", 100, 5000, 2500, 100)
 
 
+  st.sidebar.text("")
   st.sidebar.text("")
   run_query = st.sidebar.button("Run the query")
   st.sidebar.markdown('-'*17)
@@ -104,21 +108,14 @@ if tool == "Twitter":
 
 
     ## File preview
-    st.subheader("Preview the query")
+    st.markdown("### Preview the result")
     st.dataframe(tweets.head())
 
 
     ## Download file button
-    st.subheader("Download link sig")
     csv = tweets.to_csv(index=False, encoding='utf-8-sig')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download csv file</a>'
+    href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
-
-
-    ##View DF online
-    ## Full dataframe
-    st.subheader("Full file")
-    st.dataframe(tweets)
 
   # END TWITTER
