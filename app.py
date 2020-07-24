@@ -48,7 +48,7 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
 
 
 ## Search --> Text box
-search = st.text_input("What are you searching for?", "Bolsonaro")
+search = st.text_input("What are you searching for?", "Fiat Toro")
 
 ## Location --> Text box (with map if possible)
 location = st.text_input("Where are you searching it for?", "Brazil")
@@ -61,6 +61,9 @@ end_date = st.date_input("Select the end date", datetime.date.today())
 
 ## Max tweets --> Slider
 max_tweets = st.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
+
+## Language filter --> Text box
+##TODO Create language filter
 
 
 ## Run query button
@@ -84,7 +87,6 @@ if run_query:
   st.subheader("Download link sig")
   csv = tweets.to_csv(index=False, encoding='utf-8-sig')
   b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-  ##FIXME Fix encoding when downloading file
   href = f'<a href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download csv file</a>'
   st.markdown(href, unsafe_allow_html=True)
 
