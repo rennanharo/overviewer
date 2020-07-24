@@ -76,7 +76,7 @@ if tool == "Twitter":
   location = st.sidebar.text_input("Where are you searching it for?", "Brazil")
 
   ## Language --> Selector
-  langs = ["BR", "EN"]
+  langs = ['any', 'ar', 'bg', 'bn', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es', 'eu', 'fa', 'fi', 'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'mr', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sr', 'sv', 'ta', 'th', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']
   language = st.sidebar.selectbox("What language?", langs)
 
   ## Start date --> Date picker
