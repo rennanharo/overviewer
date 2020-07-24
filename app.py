@@ -29,7 +29,8 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
                                             .setUntil(enddate)\
                                             .setNear(location)\
                                             .setWithin("500mi")\
-                                            .setMaxTweets(maxtweet)
+                                            .setMaxTweets(maxtweet)\
+                                            .setLang("pt")
     
     tweet = got.manager.TweetManager.getTweets(tweetCriteria)
     
