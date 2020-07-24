@@ -16,8 +16,6 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 st.title("Welcome to The Overviewer")
 st.header("Analytics-friendly information extractor")
 st.subheader("Let's start by customizing your query")
-#st.text("Pure text")
-#st.markdown("- [ ] Markdown ")
 
 
 # TWITTER
