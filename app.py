@@ -13,7 +13,6 @@ hide_streamlit_style = """
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 # End hiding the hamburguer menu
-tool = "-"
 
 
 st.header("Welcome to The Overviewer")
