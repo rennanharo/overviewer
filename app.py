@@ -15,52 +15,27 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 # End hiding the hamburguer menu
 tool = "-"
 
-if tool == "-":
-  st.header("Welcome to The Overviewer")
-  st.markdown("""
-                  The Overviewer is an open source project to create a full-fledge tool to extract information from social media.
 
-                  Currently The Overviewer supports the following social media platforms:
-                  - Twitter
+st.header("Welcome to The Overviewer")
+st.markdown("""
+                The Overviewer is an open source project to create a full-fledge tool to extract information from social media.
 
-                  You can check the [source code here.](https://github.com/rennanharo/overviewer)\n
-                  Feel free to contribute with any suggestions or pull requests. Let's build this together.\n
-                  `Developed by Rennan Haro 2020.`
-             """)
-  st.markdown('-'*17)
+                Currently The Overviewer supports the following social media platforms:
+                - Twitter
 
-  supported_tools = ["-","Twitter"]
-  st.markdown("### ~> Start by selecting your tool in the `selector below`. ")
-  tool = st.selectbox("Select your social media", supported_tools)
+                You can check the [source code here.](https://github.com/rennanharo/overviewer)\n
+                Feel free to contribute with any suggestions or pull requests. Let's build this together.\n
+                `Developed by Rennan Haro 2020.`
+           """)
+st.markdown('-'*17)
+
+supported_tools = ["-","Twitter"]
+st.markdown("### ~> Start by selecting your tool in the `selector below`. ")
+tool = st.selectbox("Select your social media", supported_tools)
 
 # TWITTER
-def get_tweets(search, location, language, startdate, enddate, maxtweet):
-    
-    tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
-                                            .setSince(startdate)\
-                                            .setUntil(enddate)\
-                                            .setNear(location)\
-                                            .setWithin("500mi")\
-                                            .setMaxTweets(maxtweet)\
-                                            .setLang(language)
-    
-    tweet = got.manager.TweetManager.getTweets(tweetCriteria)
-    
-    text_tweets = [[tw.username,
-                tw.text,
-                tw.date,
-                tw.retweets,
-                tw.favorites,
-                tw.mentions,
-                tw.hashtags,
-                tw.geo] for tw in tweet]
-    
-    tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions','Hashtags', 'Geolocation'])
-    
-    return tweets_df
-
 if tool == "Twitter":
-  
+
   def get_tweets(search, location, language, startdate, enddate, maxtweet):
     
     tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
@@ -85,6 +60,14 @@ if tool == "Twitter":
     tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions','Hashtags', 'Geolocation'])
     
     return tweets_df
+
+  st.markdown('-'*17)
+  st.markdown("""
+                To work with Twitter, `customize your query in the sidebar to the right.`\n
+                Then, hit the `"Run the query"` button.
+           """)
+  st.markdown('-'*17)
+
 
   ## Search --> Text box
   search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
