@@ -12,15 +12,25 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
+# End hiding the hamburguer menu
 
 st.title("Welcome to The Overviewer")
-st.header("Analytics-friendly information extractor")
-st.subheader("Let's start by customizing your query")
+st.markdown("""
+                ### The Overviewer is an open source project to create a full-fledge tool to extract information from social media.
+
+                ~> Start by customizining your query in the `sidebar to the left`. 
+
+                Currently The Overviewer supports the following social media platforms:
+                - Twitter
+    
+                You can check the [source code here.](https://github.com/rennanharo/overviewer)
+            """)
+st.markdown('-'*17)
 
 
 # TWITTER
 
-def get_tweets(search, location, startdate, enddate, maxtweet):
+def get_tweets(search, location, language, startdate, enddate, maxtweet):
     
     tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
                                             .setSince(startdate)\
@@ -28,7 +38,7 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
                                             .setNear(location)\
                                             .setWithin("500mi")\
                                             .setMaxTweets(maxtweet)\
-                                            .setLang("pt")
+                                            .setLang(language)
     
     tweet = got.manager.TweetManager.getTweets(tweetCriteria)
     
@@ -47,31 +57,38 @@ def get_tweets(search, location, startdate, enddate, maxtweet):
 
 
 ## Search --> Text box
-search = st.text_input("What are you searching for?", "Fiat Toro")
+search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
 
 ## Location --> Text box (with map if possible)
-location = st.text_input("Where are you searching it for?", "Brazil")
+location = st.sidebar.text_input("Where are you searching it for?", "Brazil")
+
+## Language --> Selector
+langs = ["BR", "EN"]
+language = st.sidebar.selectbox("What language?", langs)
 
 ## Start date --> Date picker
-start_date = st.date_input("Select the start date", datetime.date(2019, 7, 30))
+start_date = st.sidebar.date_input("Select the start date", datetime.date(2019, 7, 30))
 
 ## End date --> Date picker
-end_date = st.date_input("Select the end date", datetime.date.today())
+end_date = st.sidebar.date_input("Select the end date", datetime.date.today())
 
 ## Max tweets --> Slider
-max_tweets = st.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
+max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
 
 ## Language filter --> Text box
 ##TODO Create language filter
 
 
-## Run query button
-run_query = st.button("Run the query")
+st.sidebar.text("")
+run_query = st.sidebar.button("Run the query")
+st.sidebar.markdown('-'*17)
+st.sidebar.text("Developed by Rennan Haro. 2020.")
+
 if run_query:
   with st.spinner("Wait..."):
     time.sleep(1)
 
-  tweets = get_tweets(str(search), str(location), str(start_date), str(end_date), max_tweets)
+  tweets = get_tweets(str(search), str(location), str(language), str(start_date), str(end_date), max_tweets)
   
   st.success("Done!")
   st.balloons()
@@ -96,5 +113,3 @@ if run_query:
   st.dataframe(tweets)
 
 # END TWITTER
-
-st.text("Developed by Rennan Haro. 2020.")
