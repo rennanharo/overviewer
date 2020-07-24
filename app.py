@@ -34,7 +34,6 @@ if tool == "-":
   tool = st.selectbox("Select your social media", supported_tools)
 
 # TWITTER
-
 def get_tweets(search, location, language, startdate, enddate, maxtweet):
     
     tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
@@ -61,6 +60,32 @@ def get_tweets(search, location, language, startdate, enddate, maxtweet):
     return tweets_df
 
 if tool == "Twitter":
+  
+  def get_tweets(search, location, language, startdate, enddate, maxtweet):
+    
+    tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
+                                            .setSince(startdate)\
+                                            .setUntil(enddate)\
+                                            .setNear(location)\
+                                            .setWithin("500mi")\
+                                            .setMaxTweets(maxtweet)\
+                                            .setLang(language)
+    
+    tweet = got.manager.TweetManager.getTweets(tweetCriteria)
+    
+    text_tweets = [[tw.username,
+                tw.text,
+                tw.date,
+                tw.retweets,
+                tw.favorites,
+                tw.mentions,
+                tw.hashtags,
+                tw.geo] for tw in tweet]
+    
+    tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions','Hashtags', 'Geolocation'])
+    
+    return tweets_df
+
   ## Search --> Text box
   search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
 
@@ -79,9 +104,6 @@ if tool == "Twitter":
 
   ## Max tweets --> Slider
   max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want?", 100, 5000, 2500, 100)
-
-  ## Language filter --> Text box
-  ##TODO Create language filter
 
 
   st.sidebar.text("")
