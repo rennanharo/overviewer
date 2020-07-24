@@ -23,7 +23,7 @@ st.markdown("""
                 - Twitter
 
                 You can check the [source code here.](https://github.com/rennanharo/overviewer)\n
-                Feel free to contribute with any suggestions or pull requests.
+                Feel free to contribute with any suggestions or pull requests. Developed by [`Rennan Haro.`](https://github.com/rennanharo)
            """)
 st.markdown('-'*7)
 
@@ -94,8 +94,6 @@ if tool == "Twitter":
   st.sidebar.text("")
   st.sidebar.text("")
   run_query = st.sidebar.button("Run the query")
-  st.sidebar.markdown('-'*17)
-  st.sidebar.text("Developed by Rennan Haro. 2020.")
 
   if run_query:
     with st.spinner("Wait..."):
