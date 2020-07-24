@@ -68,8 +68,6 @@ if tool == "Twitter":
                 If there are any tweets that match your criteria, a _preview_ (first 5 rows) of the datased
                 will show up, followed by a link to download the _CSV_ file.
            """)
-  st.markdown('-'*17)
-
 
   ## Search --> Text box
   search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
@@ -93,7 +91,9 @@ if tool == "Twitter":
 
   st.sidebar.text("")
   st.sidebar.text("")
+  st.sidebar.markdown('-'*17)
   run_query = st.sidebar.button("Run the query")
+
 
   if run_query:
     with st.spinner("Wait..."):
