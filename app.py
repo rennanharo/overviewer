@@ -53,10 +53,9 @@ if tool == "Twitter":
                 tw.retweets,
                 tw.favorites,
                 tw.mentions,
-                tw.hashtags,
-                tw.geo] for tw in tweet]
+                tw.hashtags] for tw in tweet]
     
-    tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions','Hashtags', 'Geolocation'])
+    tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions', 'Hashtags'])
     
     return tweets_df
 
