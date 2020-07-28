@@ -107,6 +107,8 @@ if tool == "Twitter":
     ## File preview
     st.markdown("### Preview the result")
     st.dataframe(tweets.head())
+    rows = tweets['User'].count()
+    st.write(f'Number of rows: {rows}')
 
 
     ## Download file button
