@@ -69,6 +69,7 @@ if tool == "Twitter":
            """)
 
   ## Search --> Text box
+  ## TODO --> Add operators guide
   search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
 
   ## Location --> Text box (with map if possible)
