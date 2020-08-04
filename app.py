@@ -109,7 +109,7 @@ if tool == "Twitter":
     st.markdown("### Preview the result")
     st.dataframe(tweets.head())
     rows = tweets['User'].count()
-    st.write(f'Number of rows: {rows}')
+    st.write(f'Number of tweets (rows): {rows}')
 
 
     ## Download file button
