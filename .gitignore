@@ -3,4 +3,5 @@ INTERACTIVE_GetOldTweets3.ipynb
 todo.md
 *.csv
 operators.txt
+operators.py
 table.csv
