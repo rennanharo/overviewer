@@ -6,5 +6,4 @@ The Overviewer is an open source project that will enable data analysis using da
 
 The platform is still in early dev stage. Documentation, comments and descriptions will be added progressively.
 
-[img](/Users/rennanharo/Dev/Projects/Overviewer/assets/home.png)
-
+![App Home](./assets/home.png)
