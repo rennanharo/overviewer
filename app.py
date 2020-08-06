@@ -12,9 +12,8 @@ hide_streamlit_style = """
             </style>
             """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
-# End hiding the hamburguer menu
 
-
+# Main text section
 st.markdown("""
                 ## Welcome to The Overviewer.
                 The Overviewer is an open source project to create a full-fledge tool to extract information from social media.
@@ -27,16 +26,30 @@ st.markdown("""
            """)
 st.markdown('-'*7)
 
+# Tool selector
 supported_tools = ["-","Twitter"]
 st.markdown("### ~> Start by selecting your tool in the `selector below`. ")
 tool = st.selectbox("Select your social media", supported_tools)
 
 
-# TWITTER
+# TWITTER Code
 if tool == "Twitter":
 
   def get_tweets(search, location, language, startdate, enddate, maxtweet):
-    
+    """
+      Uses GetOldTweets3 to gather twitter data
+
+      Parameters:
+        search(string): The query to perform
+        location(string): Geographical location (name. E.g.: Paris, Brazil, Beijing) to perform the search
+        language(string): Language which tweets were written in
+        startdate(date DD/MM/YYYY): Gather tweets that have been published from this date
+        enddata(date DD/MM/YYYY): Gather tweets that have been published up to this date
+        maxtweet(int): Maximum number of tweets to gather
+
+      Returns:
+        tweets_df(pandas.dataframe): A pandas dataframe containing tweets that matched the parameters
+    """
     tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
                                             .setSince(startdate)\
                                             .setUntil(enddate)\
