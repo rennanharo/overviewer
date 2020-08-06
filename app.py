@@ -50,6 +50,8 @@ if tool == "Twitter":
       Returns:
         tweets_df(pandas.dataframe): A pandas dataframe containing tweets that matched the parameters
     """
+
+    # Apply the parameters to perform the query
     tweetCriteria = got.manager.TweetCriteria().setQuerySearch(search)\
                                             .setSince(startdate)\
                                             .setUntil(enddate)\
@@ -58,8 +60,10 @@ if tool == "Twitter":
                                             .setMaxTweets(maxtweet)\
                                             .setLang(language)
     
+    # Performs the query and return the result in a list
     tweet = got.manager.TweetManager.getTweets(tweetCriteria)
     
+    # Filter the result (tweet) to show only wanted information and assign them to text_tweets
     text_tweets = [[tw.username,
                 tw.text,
                 tw.date,
@@ -68,6 +72,7 @@ if tool == "Twitter":
                 tw.mentions,
                 tw.hashtags] for tw in tweet]
     
+    # Transform text_tweets in a pandas dataframe
     tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions', 'Hashtags'])
     
     return tweets_df
