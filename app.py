@@ -4,6 +4,10 @@ import pandas as pd
 import datetime, time
 import base64
 
+# Page title and favicon
+st.beta_set_page_config(page_title="Overviewer", 
+                        page_icon="assets/favicon.ico")
+
 # Hiding the hamburguer menu
 hide_streamlit_style = """
             <style>
