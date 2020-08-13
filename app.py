@@ -4,7 +4,7 @@ import pandas as pd
 import datetime, time
 import base64
 
-st.beta_set_page_config(page_title="Ex-stream-ly Cool App", 
+st.beta_set_page_config(page_title="Overviewer", 
                         page_icon="assets/favicon.ico")
 
 # Hiding the hamburguer menu
