@@ -4,9 +4,9 @@ import datetime, time
 import base64
 from get_tweets import get_tweets
 
-# Page title and favicon
-st.beta_set_page_config(page_title="Overviewer", 
-                        page_icon="./assets/favicon.png")
+# # Page title and favicon
+# st.beta_set_page_config(page_title="Overviewer", 
+#                         page_icon="./assets/favicon.png")
 
 # Hiding the hamburguer menu
 hide_streamlit_style = """
@@ -91,11 +91,25 @@ if tool == "Twitter":
     rows = tweets['User'].count()
     st.write(f'Number of tweets (rows): {rows}')
 
-
     ## Download file button
     csv = tweets.to_csv(index=False, encoding='utf-8-sig')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download csv file</a>'
+    href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
+
+    ## Dataset explorer view
+    st.markdown("-"*17)
+    st.markdown("""
+      ## Dataset Filtering Section
+      In this section you'll be able to easily filter your dataset to remove any unwanted data.
+    """)
+    column = st.selectbox("Which column do you want to edit?", list(tweets.columns))
+    term = list(st.text_input("What are the terms you want to filter out of your data?"))
+
+    for i in term:
+      tweets_f = tweets[~tweets[column].str.contains(i)]
+
+    if st.button("Filter DF"):
+      st.dataframe(tweets_f)
 
   # END TWITTER
