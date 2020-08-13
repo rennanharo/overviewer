@@ -4,6 +4,9 @@ import pandas as pd
 import datetime, time
 import base64
 
+st.beta_set_page_config(page_title="Ex-stream-ly Cool App", 
+                        page_icon="assets/favicon.ico")
+
 # Hiding the hamburguer menu
 hide_streamlit_style = """
             <style>
