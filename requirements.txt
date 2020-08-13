@@ -1,4 +1,4 @@
-streamlit-nightly
+streamlit
 pandas
 numpy
 GetOldTweets3
