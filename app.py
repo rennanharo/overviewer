@@ -7,7 +7,6 @@ from get_tweets import get_tweets
 # # Page title and favicon
 # st.beta_set_page_config(page_title="Overviewer", 
 #                         page_icon="./assets/favicon.png")
-#
 
 # Hiding the hamburguer menu
 hide_streamlit_style = """
