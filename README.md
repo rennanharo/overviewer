@@ -10,3 +10,7 @@ The platform is still in early dev stage. Documentation, comments and descriptio
 
 In the homepage you can select the tool that you want to use.
 ![App Home](./assets/home.png)
+
+## To-do
+- I'm currently working on modularizing the functions and the file structures
+- Functionality to scrape Instagram data
