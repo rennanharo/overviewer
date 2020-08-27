@@ -9,7 +9,6 @@ import pandas as pd
 from .get_tweets import get_tweets 
 
 def render_twitter():
-  st.markdown('-'*17)
   st.markdown("""
                 ### Twitter
                 To work with **Twitter**, `customize your query in the sidebar to the left.`\n
@@ -17,6 +16,7 @@ def render_twitter():
                 If there are any tweets that match your criteria, a _preview_ (first 5 rows) of the datased
                 will show up, followed by a link to download the _CSV_ file.
            """)
+  st.markdown('-'*17)
 
   ## Search --> Text box
   ## TODO --> Add operators guide
