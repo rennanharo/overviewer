@@ -1,6 +1,4 @@
 .DS_Store
-INTERACTIVE_GetOldTweets3.ipynb
-todo.md
 *.csv
 .vscode
 *__pycache__
