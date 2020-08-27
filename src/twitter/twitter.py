@@ -62,7 +62,6 @@ def render_twitter():
     st.write(f'Number of tweets (rows): {rows}')
 
     ## Download file button
-    ## TODO --> FIX FILE DOWNLOAD
     csv = tweets.to_csv(index=False, encoding='utf-8-sig')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
