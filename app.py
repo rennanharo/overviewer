@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import datetime, time
 import base64
-from get_tweets import get_tweets
+from src.twitter.get_tweets import get_tweets
 
 # # Page title and favicon
 # st.beta_set_page_config(page_title="Overviewer", 
