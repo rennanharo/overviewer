@@ -62,6 +62,9 @@ def clean_json(tag):
 
     # Convert dictionary into dataframe
     df = pd.DataFrame.from_dict(filtered)
+    df['comments'] = df['comments'].str.join("','")
+    df['tags'] = df['tags'].str.join("','")
+    df = df.sort_values(by = 'likes', ascending = False)
     return df
 
     

@@ -9,7 +9,7 @@ from .cleaner import clean_json
 def render_instagram():
   st.header('Instagram')
   tag = st.sidebar.text_input('Which hashtag do you want to scrape comments from?')
-  maxp = st.sidebar.slider('How many posts do you want to scrape?', min_value=1, max_value=200)
+  maxp = st.sidebar.slider('How many posts do you want to scrape?', min_value=1, max_value=500)
 
   run_query = st.sidebar.button("Run the query")
   if run_query:
