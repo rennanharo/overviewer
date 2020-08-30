@@ -6,6 +6,8 @@ The Overviewer is an open source project that will enable data analysis using da
 
 The platform is still in early dev stage. Documentation, comments and descriptions will be added progressively.
 
+Feel free to contribute with PRs or suggestirons.
+
 ## Homepage
 
 In the homepage you can select the tool that you want to use.
