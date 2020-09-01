@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 GetOldTweets3
-os
 instagram-scraper
 matplotlib
 wordcloud
