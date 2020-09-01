@@ -22,7 +22,7 @@ def word_cloud(input_stopwords, df, tag):
   terms = ' '.join([comments, captions])
 
   wordcloud = WordCloud(stopwords=stopwords, background_color="white", mode="RGBA", max_words=100).generate(terms)
-  
+  ## TODO --> WORK ON THE CALLS ORDER!!!!!!
   plt.imshow(wordcloud, interpolation='bilinear')
   plt.axis('off')
   wordcloud.to_file(f"word_clouds/instagram/{tag}.png")
