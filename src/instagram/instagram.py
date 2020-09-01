@@ -5,9 +5,16 @@ import pandas as pd
 import streamlit as st
 
 from .cleaner import clean_json
+from .wordcloud import word_cloud
 
 def render_instagram():
-  st.header('Instagram')
+  st.markdown("""
+                ### Instagram
+                To work with **Instagram**, `add the hashtag you want to scrape posts from in the sidebar to the left.`\n
+                Then hit the `"Run the query"` button.
+                If there are any posts that match your hashtag, a _preview_ (first 5 rows) of the datased will show up, followed by a link to download the _CSV_ file.
+           """)
+  st.markdown('-'*17)
   tag = st.sidebar.text_input('Which hashtag do you want to scrape comments from?')
   maxp = st.sidebar.slider('How many posts do you want to scrape?', min_value=1, max_value=500)
 
