@@ -8,6 +8,7 @@ import SessionState
 # File specific imports
 from .get_tweets import get_tweets 
 from .wordcloud_twitter import word_cloud_twitter
+from binary_downloader import get_binary_file_downloader_html
 
 def render_twitter():
 
@@ -83,6 +84,8 @@ def render_twitter():
         time.sleep(1)
       word_cloud_twitter(input_stopwords, tweets)
       st.image("word_clouds/twitter/tweets.png")
+
+      st.markdown(get_binary_file_downloader_html('word_clouds/twitter/tweets.png', 'WordCloud'), unsafe_allow_html=True)
 
 
     ## TODO
