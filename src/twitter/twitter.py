@@ -42,8 +42,6 @@ def render_twitter():
   ## Max tweets --> Slider
   max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want? (The larger the number, the longer it takes to run.)", 100, 5000, 2500, 100)
 
-  input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
-
   st.sidebar.text("")
   st.sidebar.text("")
   st.sidebar.markdown('-'*17)
@@ -74,7 +72,9 @@ def render_twitter():
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
 
+    input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
     gen_wordcloud = st.sidebar.button('Generate wordcloud.')
+
     if gen_wordcloud:
       session_state.gen_wordcloud = True
 
@@ -84,6 +84,8 @@ def render_twitter():
       word_cloud_twitter(input_stopwords, tweets)
       st.image("word_clouds/twitter/tweets.png")
 
+
+    ## TODO
     # ## Dataset explorer view
     # st.markdown("-"*17)
     # st.markdown("""

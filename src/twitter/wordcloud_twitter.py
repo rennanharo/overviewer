@@ -18,7 +18,7 @@ def word_cloud_twitter(input_stopwords, df):
 
   tweets = ' '.join(tweet for tweet in df['Text'])
 
-  wordcloud = WordCloud(stopwords=stopwords, background_color="white", mode="RGBA", max_words=100).generate(tweets)
+  wordcloud = WordCloud(stopwords=stopwords, background_color="white", mode="RGBA", max_words=50).generate(tweets)
   ## TODO --> WORK ON THE CALLS ORDER!!!!!!
   plt.imshow(wordcloud, interpolation='bilinear')
   plt.axis('off')
