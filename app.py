@@ -23,7 +23,7 @@ hide_streamlit_style = """
 st.markdown(hide_streamlit_style, unsafe_allow_html=True) 
 
 # Main text section
-pages = ["Home","Twitter", "Instagram"]
+pages = ["Home", "Twitter", "Instagram"]
 page = st.sidebar.selectbox("Select your page", pages)
 
 
@@ -31,6 +31,7 @@ page = st.sidebar.selectbox("Select your page", pages)
 if page == 'Twitter':
   render_twitter()
 if page == 'Instagram':
-  render_instagram()
+  # render_instagram()
+  st.text('Under maintenance')
 elif page == 'Home':
   render_home()
