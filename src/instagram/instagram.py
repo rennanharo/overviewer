@@ -25,7 +25,7 @@ def render_instagram():
   if run_query:
     with st.spinner("Wait..."):
       time.sleep(1)
-    os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination --proxies '{"http": "http://79.120.177.106:8080"}' ./query_results")
+    os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination ./query_results")
 
     insta_df = clean_json(tag)
     st.dataframe(insta_df)
