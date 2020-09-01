@@ -5,7 +5,7 @@ import pandas as pd
 import streamlit as st
 
 from .cleaner import clean_json
-from .wordcloud import word_cloud
+from .wordcloud_insta import word_cloud_insta
 
 def render_instagram():
   st.markdown("""
@@ -43,5 +43,5 @@ def render_instagram():
     
     #word_cloud_btn = st.sidebar.button('Generate word cloud')
     ##if word_cloud_btn:
-    word_cloud(input_stopwords, insta_df, tag)
+    word_cloud_insta(input_stopwords, insta_df, tag)
     st.image(f"word_clouds/instagram/{tag}.png")

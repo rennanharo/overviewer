@@ -4,9 +4,9 @@ import base64
 import streamlit as st
 import pandas as pd
 
-
 # File specific imports
 from .get_tweets import get_tweets 
+from .wordcloud_twitter import word_cloud_twitter
 
 def render_twitter():
   st.markdown("""
@@ -38,6 +38,7 @@ def render_twitter():
   ## Max tweets --> Slider
   max_tweets = st.sidebar.slider("What is the maximum number of Tweets you want? (The larger the number, the longer it takes to run.)", 100, 5000, 2500, 100)
 
+  input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
 
   st.sidebar.text("")
   st.sidebar.text("")
@@ -67,17 +68,20 @@ def render_twitter():
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
 
-    ## Dataset explorer view
-    st.markdown("-"*17)
-    st.markdown("""
-      ## Dataset Filtering Section
-      In this section you'll be able to easily filter your dataset to remove any unwanted data.
-    """)
-    column = st.selectbox("Which column do you want to edit?", list(tweets.columns))
-    term = list(st.text_input("What are the terms you want to filter out of your data?"))
+    word_cloud_twitter(input_stopwords, tweets)
+    st.image("word_clouds/twitter/tweets.png")
 
-    for i in term:
-      tweets_f = tweets[~tweets[column].str.contains(i)]
+    # ## Dataset explorer view
+    # st.markdown("-"*17)
+    # st.markdown("""
+    #   ## Dataset Filtering Section
+    #   In this section you'll be able to easily filter your dataset to remove any unwanted data.
+    # """)
+    # column = st.selectbox("Which column do you want to edit?", list(tweets.columns))
+    # term = list(st.text_input("What are the terms you want to filter out of your data?"))
 
-    if st.button("Filter DF"):
-      st.dataframe(tweets_f)
+    # for i in term:
+    #   tweets_f = tweets[~tweets[column].str.contains(i)]
+
+    # if st.button("Filter DF"):
+    #   st.dataframe(tweets_f)
