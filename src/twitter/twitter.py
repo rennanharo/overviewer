@@ -3,12 +3,16 @@ import datetime, time
 import base64
 import streamlit as st
 import pandas as pd
+import SessionState
 
 # File specific imports
 from .get_tweets import get_tweets 
 from .wordcloud_twitter import word_cloud_twitter
 
 def render_twitter():
+
+  session_state = SessionState.get(run_query=False, gen_wordcloud=False)
+
   st.markdown("""
                 ### Twitter
                 To work with **Twitter**, `customize your query in the sidebar to the left.`\n
@@ -45,8 +49,10 @@ def render_twitter():
   st.sidebar.markdown('-'*17)
   run_query = st.sidebar.button("Run the query")
 
-
   if run_query:
+    session_state.run_query = True
+
+  if session_state.run_query:
     with st.spinner("Wait..."):
       time.sleep(1)
 
@@ -59,7 +65,7 @@ def render_twitter():
     ## File preview
     st.markdown("### Preview the result")
     st.dataframe(tweets.head())
-    rows = tweets['User'].count()
+    rows = tweets['Date'].count()
     st.write(f'Number of tweets (rows): {rows}')
 
     ## Download file button
@@ -68,8 +74,15 @@ def render_twitter():
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
 
-    word_cloud_twitter(input_stopwords, tweets)
-    st.image("word_clouds/twitter/tweets.png")
+    gen_wordcloud = st.sidebar.button('Generate wordcloud.')
+    if gen_wordcloud:
+      session_state.gen_wordcloud = True
+
+    if session_state.gen_wordcloud:
+      with st.spinner("Wait..."):
+        time.sleep(1)
+      word_cloud_twitter(input_stopwords, tweets)
+      st.image("word_clouds/twitter/tweets.png")
 
     # ## Dataset explorer view
     # st.markdown("-"*17)

@@ -30,8 +30,7 @@ def get_tweets(search, location, language, startdate, enddate, maxtweet):
     tweet = got.manager.TweetManager.getTweets(tweetCriteria)
     
     # Filter the result (tweet) to show only wanted information and assign them to text_tweets
-    text_tweets = [[tw.username,
-                tw.text,
+    text_tweets = [[tw.text,
                 tw.date,
                 tw.retweets,
                 tw.favorites,
@@ -39,6 +38,6 @@ def get_tweets(search, location, language, startdate, enddate, maxtweet):
                 tw.hashtags] for tw in tweet]
     
     # Transform text_tweets in a pandas dataframe
-    tweets_df = pd.DataFrame(text_tweets, columns = ['User', 'Text', 'Date', 'Favorites', 'Retweets', 'Mentions', 'Hashtags'])
+    tweets_df = pd.DataFrame(text_tweets, columns = ['Text', 'Date', 'Favorites', 'Retweets', 'Mentions', 'Hashtags'])
     
     return tweets_df
