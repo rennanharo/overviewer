@@ -5,5 +5,4 @@ GetOldTweets3
 os
 instagram-scraper
 matplotlib
-pillow
 wordcloud

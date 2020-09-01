@@ -30,7 +30,12 @@ def render_instagram():
     st.success("Done!")
     st.balloons()
 
+    rows = insta_df['likes'].count()
+    st.text(f'Amount of rows: {rows}')
+
     csv = insta_df.to_csv(index=False, encoding='utf-8-sig')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="instagram_posts.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
+
+    stopwords = st.sidebar.text_area('Stopwords (comma separated)')
