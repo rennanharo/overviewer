@@ -15,7 +15,7 @@ from binary_downloader import get_binary_file_downloader_html
 
 def render_twitter():
 
-  session_state = SessionState.get(run_query=False, gen_wordcloud=False)
+  session_state = SessionState.get(run_query=False, gen_wordcloud=False, tweets="")
 
   st.markdown("""
                 ### Twitter
@@ -58,7 +58,7 @@ def render_twitter():
     with st.spinner("Wait..."):
       time.sleep(1)
 
-    tweets = get_tweets(str(search), str(location), str(language), str(start_date), str(end_date), max_tweets)
+    session_state.tweets = get_tweets(str(search), str(location), str(language), str(start_date), str(end_date), max_tweets)
 
     st.success("Done!")
     st.balloons()
@@ -66,43 +66,47 @@ def render_twitter():
 
     ## File preview
     st.markdown("### Preview the result")
-    st.dataframe(tweets.head())
-    rows = tweets['Date'].count()
+    st.dataframe(session_state.tweets.head())
+    rows = session_state.tweets['Date'].count()
     st.write(f'Number of tweets (rows): {rows}')
 
     ## Download file button
-    csv = tweets.to_csv(index=False, encoding='utf-8-sig')
+    csv = session_state.tweets.to_csv(index=False, encoding='utf-8-sig')
+
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="tweets.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
 
-    input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
-    gen_wordcloud = st.sidebar.button('Generate wordcloud')
+  session_state.run_query = False
 
-    if gen_wordcloud:
-      session_state.gen_wordcloud = True
+  input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
+  gen_wordcloud = st.sidebar.button('Generate wordcloud')
 
-    if session_state.gen_wordcloud:
-      with st.spinner("Wait..."):
-        time.sleep(1)
-      word_cloud_twitter(input_stopwords, tweets)
-      st.image("word_clouds/twitter/tweets.png")
+  if gen_wordcloud:
+    session_state.gen_wordcloud = True
 
-      st.markdown(get_binary_file_downloader_html('word_clouds/twitter/tweets.png', 'WordCloud'), unsafe_allow_html=True)
+  if session_state.gen_wordcloud:
+    with st.spinner("Wait..."):
+      time.sleep(1)
+    word_cloud_twitter(input_stopwords, session_state.tweets)
+    st.image("word_clouds/twitter/tweets.png")
 
+    st.markdown(get_binary_file_downloader_html('word_clouds/twitter/tweets.png', 'WordCloud'), unsafe_allow_html=True)
 
-    ## TODO
-    # ## Dataset explorer view
-    # st.markdown("-"*17)
-    # st.markdown("""
-    #   ## Dataset Filtering Section
-    #   In this section you'll be able to easily filter your dataset to remove any unwanted data.
-    # """)
-    # column = st.selectbox("Which column do you want to edit?", list(tweets.columns))
-    # term = list(st.text_input("What are the terms you want to filter out of your data?"))
+  session_state.gen_wordcloud = False
 
-    # for i in term:
-    #   tweets_f = tweets[~tweets[column].str.contains(i)]
+  ## TODO
+  # ## Dataset explorer view
+  # st.markdown("-"*17)
+  # st.markdown("""
+  #   ## Dataset Filtering Section
+  #   In this section you'll be able to easily filter your dataset to remove any unwanted data.
+  # """)
+  # column = st.selectbox("Which column do you want to edit?", list(tweets.columns))
+  # term = list(st.text_input("What are the terms you want to filter out of your data?"))
 
-    # if st.button("Filter DF"):
-    #   st.dataframe(tweets_f)
+  # for i in term:
+  #   tweets_f = tweets[~tweets[column].str.contains(i)]
+
+  # if st.button("Filter DF"):
+  #   st.dataframe(tweets_f)

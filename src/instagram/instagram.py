@@ -14,7 +14,7 @@ from binary_downloader import get_binary_file_downloader_html
 
 def render_instagram():
 
-  session_state = SessionState.get(run_query=False, gen_wordcloud=False)
+  session_state = SessionState.get(run_query=False, gen_wordcloud=False, insta_df="")
 
   st.markdown("""
                 ### Instagram
@@ -36,31 +36,34 @@ def render_instagram():
       time.sleep(1)
     os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination ./query_results")
 
-    insta_df = clean_json(tag)
-    st.dataframe(insta_df)
+    session_state.insta_df = clean_json(tag)
+    st.dataframe(session_state.insta_df)
 
     st.success("Done!")
     st.balloons()
 
-    rows = insta_df['likes'].count()
+    rows = session_state.insta_df['likes'].count()
     st.text(f'Amount of rows: {rows}')
 
-    csv = insta_df.to_csv(index=False, encoding='utf-8-sig')
+    csv = session_state.insta_df.to_csv(index=False, encoding='utf-8-sig')
     b64 = base64.b64encode(csv.encode()).decode()  # some strings <-> bytes conversions necessary here
-    href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="instagram_posts.csv">Download raw csv file</a>'
+    href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="{tag}.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
-    
-    input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
-    gen_wordcloud = st.sidebar.button('Generate wordcloud')
-    
-    if gen_wordcloud:
-      session_state.gen_wordcloud = True
 
-  ## TODO --> Fix reruning query when generating wordcloud
+  session_state.run_query = False
+    
+  input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
+  gen_wordcloud = st.sidebar.button('Generate wordcloud')
+  
+  if gen_wordcloud:
+    session_state.gen_wordcloud = True
+
   if session_state.gen_wordcloud:  
     with st.spinner("Wait..."):
       time.sleep(1)
-    word_cloud_insta(input_stopwords, insta_df, tag)
+    word_cloud_insta(input_stopwords, session_state.insta_df, tag)
     st.image(f"word_clouds/instagram/{tag}.png")
 
     st.markdown(get_binary_file_downloader_html(f'word_clouds/instagram/{tag}.png', 'WordCloud'), unsafe_allow_html=True)
+  
+  session_state.gen_wordcloud = False
