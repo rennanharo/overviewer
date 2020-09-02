@@ -8,6 +8,7 @@ import SessionState
 # File specific imports
 from .cleaner import clean_json
 from .wordcloud_insta import word_cloud_insta
+from binary_downloader import get_binary_file_downloader_html
 
 ## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
 
@@ -55,6 +56,11 @@ def render_instagram():
     if gen_wordcloud:
       session_state.gen_wordcloud = True
 
-    if session_state.gen_wordcloud:  
-      word_cloud_insta(input_stopwords, insta_df, tag)
-      st.image(f"word_clouds/instagram/{tag}.png")
+  ## TODO --> Fix reruning query when generating wordcloud
+  if session_state.gen_wordcloud:  
+    with st.spinner("Wait..."):
+      time.sleep(1)
+    word_cloud_insta(input_stopwords, insta_df, tag)
+    st.image(f"word_clouds/instagram/{tag}.png")
+
+    st.markdown(get_binary_file_downloader_html(f'word_clouds/instagram/{tag}.png', 'WordCloud'), unsafe_allow_html=True)
