@@ -3,11 +3,18 @@ import base64
 import os
 import pandas as pd
 import streamlit as st
+import SessionState
 
+# File specific imports
 from .cleaner import clean_json
 from .wordcloud_insta import word_cloud_insta
 
+## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
+
 def render_instagram():
+
+  session_state = SessionState.get(run_query=False, gen_wordcloud=False)
+
   st.markdown("""
                 ### Instagram
                 To work with **Instagram**, `add the hashtag you want to scrape posts from in the sidebar to the left.`\n
@@ -20,9 +27,10 @@ def render_instagram():
 
   run_query = st.sidebar.button("Run the query")
 
-  input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
-
   if run_query:
+    session_state.run_query = True
+    
+  if session_state.run_query:
     with st.spinner("Wait..."):
       time.sleep(1)
     os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination ./query_results")
@@ -41,7 +49,12 @@ def render_instagram():
     href = f'<a style="font-size: 1.10rem; font-weight: 500; background-color: #0068c9; color: white; border-radius:0.5rem; padding:0.3rem 0.8rem;" href="data:file/csv;base64,{b64}" encoding="utf-8-sig" download="instagram_posts.csv">Download raw csv file</a>'
     st.markdown(href, unsafe_allow_html=True)
     
-    #word_cloud_btn = st.sidebar.button('Generate word cloud')
-    ##if word_cloud_btn:
-    word_cloud_insta(input_stopwords, insta_df, tag)
-    st.image(f"word_clouds/instagram/{tag}.png")
+    input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
+    gen_wordcloud = st.sidebar.button('Generate wordcloud')
+    
+    if gen_wordcloud:
+      session_state.gen_wordcloud = True
+
+    if session_state.gen_wordcloud:  
+      word_cloud_insta(input_stopwords, insta_df, tag)
+      st.image(f"word_clouds/instagram/{tag}.png")

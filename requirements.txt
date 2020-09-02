@@ -2,6 +2,6 @@ streamlit
 pandas
 numpy
 GetOldTweets3
-instagram-scraper
+-e git://https://github.com/rennanharo/instagram-scraper.gt#egg=instagram-scraper
 matplotlib
 wordcloud

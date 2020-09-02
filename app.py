@@ -31,7 +31,7 @@ page = st.sidebar.selectbox("Select your page", pages)
 if page == 'Twitter':
   render_twitter()
 if page == 'Instagram':
-  # render_instagram()
-  st.text('Under maintenance')
+  render_instagram()
+  
 elif page == 'Home':
   render_home()

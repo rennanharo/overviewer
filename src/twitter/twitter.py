@@ -5,10 +5,13 @@ import streamlit as st
 import pandas as pd
 import SessionState
 
+
 # File specific imports
 from .get_tweets import get_tweets 
 from .wordcloud_twitter import word_cloud_twitter
 from binary_downloader import get_binary_file_downloader_html
+
+## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
 
 def render_twitter():
 
@@ -74,7 +77,7 @@ def render_twitter():
     st.markdown(href, unsafe_allow_html=True)
 
     input_stopwords = st.sidebar.text_area('Stopwords (comma separated)')
-    gen_wordcloud = st.sidebar.button('Generate wordcloud.')
+    gen_wordcloud = st.sidebar.button('Generate wordcloud')
 
     if gen_wordcloud:
       session_state.gen_wordcloud = True
