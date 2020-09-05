@@ -3,13 +3,12 @@ import datetime, time
 import base64
 import streamlit as st
 import pandas as pd
-import SessionState
-
 
 # File specific imports
-from src.twitter.get_tweets import get_tweets 
-from src.twitter.wordcloud_twitter import word_cloud_twitter
-from binary_downloader import get_binary_file_downloader_html
+from models.twitter.get_tweets import get_tweets 
+from models.twitter.wordcloud_twitter import word_cloud_twitter
+from models.app.binary_downloader import get_binary_file_downloader_html
+import models.app.SessionState as SessionState
 
 ## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
 

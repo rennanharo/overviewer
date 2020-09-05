@@ -31,6 +31,5 @@ if page == 'Twitter':
   render_twitter()
 if page == 'Instagram':
   render_instagram()
-  
 elif page == 'Home':
   render_home()

@@ -3,12 +3,12 @@ import base64
 import os
 import pandas as pd
 import streamlit as st
-import SessionState
 
 # File specific imports
-from src.instagram.cleaner import clean_json
-from src.instagram.wordcloud_insta import word_cloud_insta
-from binary_downloader import get_binary_file_downloader_html
+from models.instagram.cleaner import clean_json
+from models.instagram.wordcloud_insta import word_cloud_insta
+from models.app.binary_downloader import get_binary_file_downloader_html
+import models.app.SessionState as SessionState
 
 ## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
 
