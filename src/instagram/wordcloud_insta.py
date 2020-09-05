@@ -27,4 +27,4 @@ def word_cloud_insta(input_stopwords, df, tag):
   plt.axis('off')
   wordcloud.to_file(f"word_clouds/instagram/{tag}.png")
 
-  strada = ['Strada, Fiat, Nova Strada, Fiat Strada, Venda, Vendas, Nova, dia, fiatstrada, novastrada, você, bio, WhatsApp, fiatbr, mais, strada2021, modelo, Veículo, vai, preço, amigo, carro, pra, ano, novo, CNPJ, versão']
+  strada = ['Strada, Fiat, Nova Stsrada, Fiat Strada, Venda, Vendas, Nova, dia, fiatstrada, novastrada, você, bio, WhatsApp, fiatbr, mais, strada2021, modelo, Veículo, vai, preço, amigo, carro, pra, ano, novo, CNPJ, versão']
