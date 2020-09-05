@@ -6,7 +6,7 @@ import streamlit as st
 
 # File specific imports
 from models.instagram.cleaner import clean_json
-from models.instagram.wordcloud_insta import word_cloud_insta
+from models.app.wordclouds import word_cloud_insta
 from models.app.binary_downloader import get_binary_file_downloader_html
 import models.app.SessionState as SessionState
 

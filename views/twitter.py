@@ -6,7 +6,7 @@ import pandas as pd
 
 # File specific imports
 from models.twitter.get_tweets import get_tweets 
-from models.twitter.wordcloud_twitter import word_cloud_twitter
+from models.app.wordclouds import word_cloud_twitter
 from models.app.binary_downloader import get_binary_file_downloader_html
 import models.app.SessionState as SessionState
 
