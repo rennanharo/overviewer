@@ -25,6 +25,6 @@ def word_cloud_insta(input_stopwords, df, tag):
   ## TODO --> WORK ON THE CALLS ORDER!!!!!!
   plt.imshow(wordcloud, interpolation='bilinear')
   plt.axis('off')
-  wordcloud.to_file(f"word_clouds/instagram/{tag}.png")
+  wordcloud.to_file(f"assets/outputs/word_clouds/instagram/{tag}.png")
 
   strada = ['Strada, Fiat, Nova Stsrada, Fiat Strada, Venda, Vendas, Nova, dia, fiatstrada, novastrada, você, bio, WhatsApp, fiatbr, mais, strada2021, modelo, Veículo, vai, preço, amigo, carro, pra, ano, novo, CNPJ, versão, carro, Fiat, mais, novastrada, mil, strada, fiatstrada, pra, ficou, Fiat Strada, vai, sim, versão, giubrandaooficial, nova, Gui, tá, ZERO KM, Giu, picape, vídeo, carros, novo, venda, você, vc, dia, picapes, es, valor, RODAS, fiatbr, strada2021, ano, ser, trabalho, cnpj, fora, aqui, acho, pro, car, vendas, vem, achei, www, desconto, preço']

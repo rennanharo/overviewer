@@ -88,9 +88,9 @@ def render_twitter():
     with st.spinner("Wait..."):
       time.sleep(1)
     word_cloud_twitter(input_stopwords, session_state.tweets)
-    st.image("word_clouds/twitter/tweets.png")
+    st.image("assets/outputs/word_clouds/twitter/tweets.png")
 
-    st.markdown(get_binary_file_downloader_html('word_clouds/twitter/tweets.png', 'WordCloud'), unsafe_allow_html=True)
+    st.markdown(get_binary_file_downloader_html('assets/outputs/word_clouds/twitter/tweets.png', 'WordCloud'), unsafe_allow_html=True)
 
   session_state.gen_wordcloud = False
 

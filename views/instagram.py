@@ -34,7 +34,7 @@ def render_instagram():
   if session_state.run_query:
     with st.spinner("Wait..."):
       time.sleep(1)
-    os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination ./query_results")
+    os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination assets/outputs/instagram/query_results")
 
     session_state.insta_df = clean_json(tag)
     st.dataframe(session_state.insta_df)
@@ -62,8 +62,8 @@ def render_instagram():
     with st.spinner("Wait..."):
       time.sleep(1)
     word_cloud_insta(input_stopwords, session_state.insta_df, tag)
-    st.image(f"word_clouds/instagram/{tag}.png")
+    st.image(f"assets/outputs/word_clouds/instagram/{tag}.png")
 
-    st.markdown(get_binary_file_downloader_html(f'word_clouds/instagram/{tag}.png', 'WordCloud'), unsafe_allow_html=True)
+    st.markdown(get_binary_file_downloader_html(f'assets/outputs/word_clouds/instagram/{tag}.png', 'WordCloud'), unsafe_allow_html=True)
   
   session_state.gen_wordcloud = False

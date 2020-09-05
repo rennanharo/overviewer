@@ -21,6 +21,6 @@ def word_cloud_twitter(input_stopwords, df):
   wordcloud = WordCloud(stopwords=stopwords, background_color="white", mode="RGBA", max_words=50).generate(tweets)
   plt.imshow(wordcloud, interpolation='bilinear')
   plt.axis('off')
-  wordcloud.to_file("word_clouds/twitter/tweets.png")
+  wordcloud.to_file("assets/outputs/word_clouds/twitter/tweets.png")
 
   strada = ['Strada, Fiat, Nova Strada, Fiat Strada, Venda, Vendas, Nova, dia, fiatstrada, novastrada, você, bio, WhatsApp, fiatbr, mais, strada2021, modelo, Veículo, vai, preço, amigo, carro, pra, ano, novo, CNPJ, versão']

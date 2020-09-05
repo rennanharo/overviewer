@@ -4,7 +4,7 @@ import csv
 
 # Call functions to populate the dictionary
 def clean_json(tag):
-    with open(f'./query_results/{tag}.json') as file:
+    with open(f'assets/outputs/instagram/query_results/{tag}.json') as file:
         data = json.load(file)
     file.close()
     
