@@ -6,8 +6,8 @@ import streamlit as st
 import SessionState
 
 # File specific imports
-from .cleaner import clean_json
-from .wordcloud_insta import word_cloud_insta
+from src.instagram.cleaner import clean_json
+from src.instagram.wordcloud_insta import word_cloud_insta
 from binary_downloader import get_binary_file_downloader_html
 
 ## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables

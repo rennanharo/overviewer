@@ -3,10 +3,9 @@ import base64
 import streamlit as st
 import pandas as pd
 
-from src.pages.home import render_home
-from src.twitter.get_tweets import get_tweets
-from src.twitter.twitter import render_twitter
-from src.instagram.instagram import render_instagram
+from views.home import render_home
+from views.twitter import render_twitter
+from views.instagram import render_instagram
 
 # Page title and favicon
 st.beta_set_page_config(page_title="Overviewer", 

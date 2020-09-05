@@ -7,8 +7,8 @@ import SessionState
 
 
 # File specific imports
-from .get_tweets import get_tweets 
-from .wordcloud_twitter import word_cloud_twitter
+from src.twitter.get_tweets import get_tweets 
+from src.twitter.wordcloud_twitter import word_cloud_twitter
 from binary_downloader import get_binary_file_downloader_html
 
 ## TODO --> Work on the SessionState variables to avoid reloading the page after changin any variables
