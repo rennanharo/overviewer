@@ -7,6 +7,7 @@ def render_home():
 
                   Currently The Overviewer supports the following social media platforms:
                   - Twitter
+                  - Instagram
 
                   You can check the [source code here.](https://github.com/rennanharo/overviewer)\n
                   Feel free to contribute with any suggestions or pull requests. Developed by [`Rennan Haro.`](https://github.com/rennanharo)
