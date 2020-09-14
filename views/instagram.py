@@ -34,6 +34,7 @@ def render_instagram():
   if session_state.run_query:
     with st.spinner("Wait..."):
       time.sleep(1)
+    os.chmod('assets/outputs/instagram/query_results',0o777)
     os.system(f"instagram-scraper --media-types none --tag {tag} --maximum {maxp} --comments --retry-forever --destination assets/outputs/instagram/query_results")
 
     session_state.insta_df = clean_json(tag)
