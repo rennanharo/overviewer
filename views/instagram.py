@@ -23,7 +23,7 @@ def render_instagram():
                 If there are any posts that match your hashtag, a _preview_ (first 5 rows) of the datased will show up, followed by a link to download the _CSV_ file.
            """)
   st.markdown('-'*17)
-  tag = st.sidebar.text_input('Which hashtag do you want to scrape comments from?')
+  tag = st.sidebar.text_input('Which hashtag do you want to scrape comments from?').lower()
   maxp = st.sidebar.slider('How many posts do you want to scrape?', min_value=1, max_value=500)
 
   run_query = st.sidebar.button("Run the query")
