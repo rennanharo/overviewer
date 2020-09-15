@@ -27,7 +27,7 @@ def render_twitter():
 
   ## Search --> Text box
   ## TODO --> Add operators guide
-  search = st.sidebar.text_input("What are you searching for?", "Fiat Toro")
+  search = st.sidebar.text_area("What are you searching for?", "Fiat Toro")
 
   ## Location --> Text box (with map if possible)
   location = st.sidebar.text_input("Where are you searching it for?", "Brazil")
