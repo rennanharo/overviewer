@@ -26,7 +26,6 @@ def render_twitter():
   st.markdown('-'*17)
 
   ## Search --> Text box
-  ## TODO --> Add operators guide
   search = st.sidebar.text_area("What are you searching for?", "Fiat Toro")
 
   ## Location --> Text box (with map if possible)
