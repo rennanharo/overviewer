@@ -46,7 +46,7 @@ def main():
     if session_state.source_selector != []:
         search = st.button('pesquisar')
         if search:
-            session_state.search = True
+           session_state.search = True
 
     session_state.params = {
         'sources': session_state.source_selector,
@@ -57,10 +57,10 @@ def main():
         'endt': session_state.end_date,
     }
     
+    
     if session_state.search:
         render_visualizer(session_state.params)
-
-
+    session_state.search = False
     
 
 
