@@ -10,6 +10,8 @@ Feel free to contribute with PRs or suggestirons.
 
 ## Homepage
 
+That's from EC2!!
+
 In the homepage you can select the tool that you want to use.
 ![App Home](./assets/home.png)
 
