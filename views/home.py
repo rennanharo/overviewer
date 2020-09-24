@@ -9,4 +9,4 @@ def render_home():
   st.markdown(header_html, unsafe_allow_html=True)
 
   # Main header
-  st.markdown("<h1 class='main-header'>Explore o que o mundo está dizendo sobre nós.</h1>", unsafe_allow_html=True)
+  st.markdown("<h1 class='main-header'>Explore o que o TESTING!!! mundo está dizendo sobre nós.</h1>", unsafe_allow_html=True)
