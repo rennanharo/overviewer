@@ -57,9 +57,11 @@ def main():
         'endt': session_state.end_date,
     }
     
-    
+    link = f"<a href='http://52.201.220.9:8502' target='_self'>Explore</a>"
+
     if session_state.search:
         render_visualizer(session_state.params)
+        st.markdown(link, unsafe_allow_html=True)        
     session_state.search = False
     
 
