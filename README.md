@@ -1,6 +1,6 @@
 # Overviewer
 
-[![Heroku Badge](https://img.shields.io/badge/Heroku-App%20link-Purple)](https://overviewer.co)
+[![Heroku Badge](https://img.shields.io/badge/Heroku-App%20link-Purple)]
 
 The Overviewer is an open source project that will enable data analysis using data from social media.
 
@@ -8,11 +8,4 @@ The platform is still in early dev stage. Documentation, comments and descriptio
 
 Feel free to contribute with PRs or suggestirons.
 
-## Homepage
-a
-In the homepage you can select the tool that you want to use.
-![App Home](./assets/home.png)
-
-## To-do
-- I'm currently working on modularizing the functions and the file structures
-- Functionality to scrape Instagram data
+**NOTE**: The web version has been discontinued due to cost issues. I'm still developing the platform but currently locally.
